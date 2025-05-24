@@ -74,10 +74,6 @@ async function query() {
   try {
     let result = await get(`/enroll/queue/${phone}`);
 
-    if (result.rank === -1) {
-      return err('대기중인 검차가 없습니다');
-    }
-
     document.getElementById('queue').innerText = queues[result.type];
     document.getElementById('rank').innerText = result.rank;
 

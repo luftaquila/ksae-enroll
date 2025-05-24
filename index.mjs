@@ -73,6 +73,10 @@ app.get('/queue/:phone', async (req, res) => {
       WHERE phone = ?
     `).get(req.params.phone);
 
+    if (!rank) {
+      return res.status(404).send('등록 대기중인 대회가 없습니다.');
+    }
+
     res.json({ rank: rank ? rank.rank : -1, type: rank.type });
   } catch (e) {
     return res.status(500).send(`DB 오류: ${e}`);
@@ -182,7 +186,7 @@ app.delete('/admin/:type', (req, res) => {
 app.get('/settings/sms', (req, res) => {
   try {
     const sms = db.prepare('SELECT value FROM settings WHERE key = ?').get('sms');
-    res.json({ value: sms.value });
+    res.json({ value: Math.floor(sms.value) });
   } catch (e) {
     return res.status(500).send(`DB 오류: ${e}`);
   }
@@ -190,14 +194,14 @@ app.get('/settings/sms', (req, res) => {
 
 // update sms configuration
 app.patch('/admin/settings/sms', (req, res) => {
-  const cnt = Number(req.body.value);
+  const value = Number(req.body.value);
 
-  if (Number.isNaN(cnt) || cnt < 0) {
+  if (Number.isNaN(value) || value < 0) {
     return res.status(400).send('잘못된 설정값입니다.');
   }
 
   try {
-    if (cnt) {
+    if (value) {
       if (!process.env.NAVER_CLOUD_ACCESS_KEY ||
         !process.env.NAVER_CLOUD_SECRET_KEY ||
         !process.env.NAVER_CLOUD_SMS_SERVICE_ID ||
