@@ -6,8 +6,8 @@ import pinoHttp from 'pino-http';
 import Database from 'better-sqlite3';
 
 const queues = {
-  formula: { name: 'Formula', length: 0 },
-  baja: { name: 'Baja', length: 0 },
+  formula: { name: 'Formula', short: 'FSK', length: 0 },
+  baja: { name: 'Baja', short: 'BSK', length: 0 },
 };
 
 // init db
@@ -137,10 +137,15 @@ app.delete('/admin/:type', (req, res) => {
   }
 
   // send SMS to next waiter
+  let order = 0;
   let target = undefined;
 
   try {
-    const order = Number(db.prepare(`SELEECT value FROM settings WHERE key = 'sms'`).get().value);
+    order = Number(db.prepare(`SELECT value FROM settings WHERE key = 'sms'`).get().value);
+
+    if (order < 1) {
+      return;
+    }
 
     target = db.prepare(`SELECT * FROM queue WHERE type = ? ORDER BY timestamp ASC LIMIT 1 OFFSET ?`).get(req.params.type, order - 1);
   } catch (e) {
@@ -175,7 +180,7 @@ app.delete('/admin/:type', (req, res) => {
     sms.write(JSON.stringify({
       type: 'SMS',
       from: process.env.PHONE_NUMBER_SMS_SENDER,
-      content: `[${target.type.toUpperCase()} ${new Date().getFullYear()}]\n등록 대기 순서 ${order}번입니다.\n등록 부스로 오세요.`,
+      content: `[${queues[target.type].short} ${new Date().getFullYear()}]\n등록 대기 순서 ${order}번입니다. 등록 부스로 오세요.`,
       messages: [{ to: target.phone }]
     }));
     sms.end();
