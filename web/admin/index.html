@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>등록 대기열 관리</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/assets/btn.css" />
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="../node_modules/notyf/notyf.min.css" />
+</head>
+
+<body>
+  <div class='container'>
+    <h1>🕹️ 등록 대기열 관리</h1>
+
+    <div id='tabs'></div>
+
+    <div id='status-container'>
+      <span>대기: <b><span id='status'>-</span></b> 명</span>
+      <span>업데이트: <span id='update'>-</span> 초 전</span>
+    </div>
+
+    <div id='tab-container'></div>
+
+    <div id='advanced-container'>
+      <details>
+        <summary>Advanced</summary>
+        <div>
+          <a href='/register' class='btn blue'><i class='fa fa-link'></i> 검차 대기열 등록 페이지</a>
+        </div>
+        <div>
+          SMS 알림 대기 순번 : <input type='number' id='sms' />
+        </div>
+      </details>
+    </div>
+  </div>
+</body>
+
+<script src='../node_modules/notyf/notyf.min.js'></script>
+<script src='script.js'></script>
+
+</html>

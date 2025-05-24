@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSAE 등록 대기</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/assets/btn.css" />
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="../node_modules/notyf/notyf.min.css" />
+</head>
+
+<body>
+  <div id='container'>
+    <h1>KSAE 자작자동차대회 등록 대기</h1>
+
+    <select id="event"></select>
+
+    <div>
+      <input type="tel" id="phone" maxlength="13" placeholder="전화번호" />
+    </div>
+
+    <div id="agree-container">
+      <label for="agree">
+        <input id="agree" type="checkbox"> 전화번호 수집 및 이용 동의
+      </label>
+      <p>
+        전화번호는 검차 입장 알림을 위해 사용되며, 입장 시까지 보관됩니다.<br>
+        <b>대기 순번이 가까워지면</b> 문자로 알림이 전송됩니다.
+      </p>
+      <span class="btn green" id="submit"><i class="fa fa-plus"></i>등록</span>
+    </div>
+  </div>
+</body>
+
+<script src='../node_modules/notyf/notyf.min.js'></script>
+<script src='script.js'></script>
+
+</html>

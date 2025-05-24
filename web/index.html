@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSAE 등록 대기열 조회</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/assets/btn.css" />
+  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+  <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+</head>
+
+<body>
+  <div id='container'>
+    <h1>💡 등록 대기 순번 조회</h1>
+
+    <div>
+      <input type="tel" id="phone" maxlength="13" placeholder="전화번호" />
+      <span class="btn green" id="check"><i class="fa fa-magnifying-glass"></i> 조회</span>
+    </div>
+
+    <table id="status">
+      <tr>
+        <td>대회</td>
+        <td>:</td>
+        <th id="queue">-</th>
+      </tr>
+      <tr>
+        <td>순번</td>
+        <td>:</td>
+        <th id="rank">-</th>
+      </tr>
+    </table>
+
+    <h3>🛎️ 실시간 대기 현황</h3>
+
+    <table id='total'></table>
+
+    <div>
+      <span>마지막 업데이트 : <span id="update">-</span> 초 전</span>
+    </div>
+
+    <div id="tips">
+      전화번호는 등록 시 입력한 알림 받을 번호입니다.<br>
+      10초마다 내 순번과 전체 대기열 현황이 모두 새로고침됩니다.
+    </div>
+</body>
+
+<script src='node_modules/notyf/notyf.min.js'></script>
+<script src='script.js'></script>
+
+</html>

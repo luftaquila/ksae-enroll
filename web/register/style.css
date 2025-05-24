@@ -1,0 +1,133 @@
+@font-face {
+  font-family: 'Goorm Sans';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Goorm Sans';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font-family: "Goorm Sans", "MonoplexKR", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+div#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+div#container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+
+div#agree-container {
+  flex-direction: column;
+  gap: 0.5rem!important;
+}
+
+div#agree-container > p {
+  font-size: 1.2rem;
+  line-height: 2;
+  text-align: center;
+}
+
+input#phone,
+select#event {
+  height: 4rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+}
+
+input#phone {
+  width: 24rem;
+}
+
+select#event {
+  width: 20rem;
+}
+
+input#agree {
+  font-size: 2rem;
+}
+
+label {
+  transform: scale(1.7);
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+input#phone:focus {
+  outline: none;
+  border-width: 2px;
+  border-color: #007bff;
+}
+
+span#submit {
+  margin-bottom: 0.3rem;
+  width: 10rem;
+  height: 2.8rem;
+  line-height: 3rem;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+span#submit i {
+  margin-right: 0.75rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.notyf__toast {
+  min-width: 25rem!important;
+  max-width: 40rem!important;
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+@media(max-width: 768px) {
+  body {
+    zoom: 0.5;
+  }
+}
