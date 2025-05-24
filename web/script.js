@@ -35,7 +35,7 @@ document.getElementById('check').addEventListener('click', query);
 
 async function refresh() {
   try {
-    const queue = await get('/queue');
+    const queue = await get('/enroll/queue');
     let html = '';
 
     for (let [k, v] of Object.entries(queue)) {
@@ -72,7 +72,7 @@ async function query() {
   }
 
   try {
-    let result = await get(`/queue/${phone}`);
+    let result = await get(`/enroll/queue/${phone}`);
 
     if (result.rank === -1) {
       return err('대기중인 검차가 없습니다');

@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   // draw tabs, contents and advanced menu
   await (async () => {
     try {
-      queues = await get('/queue');
+      queues = await get('/enroll/queue');
 
       let tabs = '';
       let contents = '';
@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", async () => {
       document.getElementById('tabs').innerHTML = tabs;
       document.getElementById('tab-container').innerHTML = contents;
 
-      const sms = await get('/settings/sms');
+      const sms = await get('/enroll/settings/sms');
       document.getElementById('sms').value = sms.value;
     } catch (e) {
       return notyf.error(`대기열 정보를 가져오지 못했습니다.<br>${e.message}`);
@@ -60,7 +60,7 @@ document.addEventListener('click', async e => {
     try {
       let current = localStorage.getItem('current');
 
-      await post('DELETE', `/admin/${current}`, {
+      await post('DELETE', `/enroll/admin/${current}`, {
         phone: e.target.closest('.delete').dataset.target
       });
 
@@ -74,11 +74,11 @@ document.addEventListener('click', async e => {
 document.addEventListener('change', async e => {
   if (e.target.matches('#sms')) {
     try {
-      await post('PATCH', '/admin/settings/sms', {
+      await post('PATCH', '/enroll/admin/settings/sms', {
         value: document.getElementById('sms').value
       });
 
-      let sms = await get('/settings/sms');
+      let sms = await get('/enroll/settings/sms');
       document.getElementById('sms').value = sms.value;
 
       notyf.success('SMS 설정을 변경했습니다.');
@@ -101,7 +101,7 @@ async function refresh() {
       target.click();
     }
 
-    let sms = await get('/settings/sms');
+    let sms = await get('/enroll/settings/sms');
     document.getElementById('sms').value = sms.value;
 
     if (!last) {
@@ -117,7 +117,7 @@ async function refresh() {
 
 async function refresh_queue(q) {
   try {
-    let queue = await get(`/admin/${q}`);
+    let queue = await get(`/enroll/admin/${q}`);
     let html = '<tr>';
 
     for (let item of queue) {

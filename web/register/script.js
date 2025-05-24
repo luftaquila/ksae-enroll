@@ -16,7 +16,7 @@ let entries = undefined;
 
 window.addEventListener("DOMContentLoaded", async () => {
   try {
-    const queue = await get('/queue');
+    const queue = await get('/enroll/queue');
     let html = '<option value="" selected disabled>대회 선택</option>';
 
     for (const [k, v] of Object.entries(queue)) {
@@ -58,7 +58,7 @@ document.getElementById('submit').addEventListener('click', async () => {
   }
 
   try {
-    await post(`/register/${data.type}`, data);
+    await post(`/enroll/register/${data.type}`, data);
 
     document.getElementById('event').value = '';
     document.getElementById('phone').value = '';
