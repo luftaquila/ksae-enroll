@@ -60,7 +60,6 @@ document.getElementById('submit').addEventListener('click', async () => {
   try {
     await post(`/enroll/register/${data.type}`, data);
 
-    document.getElementById('event').value = '';
     document.getElementById('phone').value = '';
     document.getElementById('agree').checked = false;
 
