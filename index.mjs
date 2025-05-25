@@ -54,13 +54,7 @@ app.listen(8000);
 
 // return queue list
 app.get('/queue', (req, res) => {
-  try {
-    const cnt = db.prepare(`SELECT type, COUNT(*) AS count FROM queue GROUP BY type`).all();
-    cnt.forEach(item => queues[item.type].length = item.count);
-    res.json(queues);
-  } catch (e) {
-    return res.status(500).send(`DB 오류: ${e}`);
-  }
+  res.json(queues);
 });
 
 // return rank in queue
@@ -104,6 +98,7 @@ app.post('/register/:type', async (req, res) => {
 
   try {
     db.prepare('INSERT INTO queue (phone, timestamp, type) VALUES (?, ?, ?)').run(req.body.phone, Date.now(), req.params.type);
+    queues[req.params.type].length++;
     res.status(201).send();
   } catch (e) {
     if (e.code === 'SQLITE_CONSTRAINT_PRIMARYKEY') {
@@ -126,6 +121,7 @@ app.delete('/admin/:type', (req, res) => {
 
   try {
     const result = db.prepare('DELETE FROM queue WHERE phone = ? AND type = ?').run(req.body.phone, req.params.type);
+    queues[req.params.type].length--; 
 
     if (result.changes === 0) {
       return res.status(404).send('해당 전화번호의 대기자가 없습니다.');
