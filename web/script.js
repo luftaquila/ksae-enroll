@@ -16,8 +16,8 @@ let queues = {};
 let last = undefined;
 
 window.addEventListener("DOMContentLoaded", async () => {
-  if (localStorage.getItem('phone')) {
-    document.getElementById('phone').value = localStorage.getItem('phone');
+  if (localStorage.getItem('phone-enroll')) {
+    document.getElementById('phone').value = localStorage.getItem('phone-enroll');
     document.getElementById('phone').dispatchEvent(new Event('input'));
   }
 
@@ -45,7 +45,7 @@ async function refresh() {
 
     document.getElementById('total').innerHTML = html;
 
-    if (localStorage.getItem('phone')) {
+    if (localStorage.getItem('phone-enroll')) {
       await query();
     }
 
@@ -77,7 +77,7 @@ async function query() {
     document.getElementById('queue').innerText = queues[result.type];
     document.getElementById('rank').innerText = result.rank;
 
-    localStorage.setItem('phone', phone);
+    localStorage.setItem('phone-enroll', phone);
   } catch (e) {
     return err(e.message);
   }
@@ -87,7 +87,7 @@ async function query() {
     document.getElementById('queue').innerText = '-';
     document.getElementById('rank').innerText = '-';
 
-    localStorage.removeItem('phone');
+    localStorage.removeItem('phone-enroll');
   }
 }
 

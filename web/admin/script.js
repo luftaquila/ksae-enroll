@@ -52,13 +52,13 @@ document.addEventListener('click', async e => {
     e.target.classList.add('active');
     document.getElementById(`${e.target.id}-table`).classList.remove('hidden');
 
-    localStorage.setItem('current', e.target.id);
+    localStorage.setItem('current-enroll', e.target.id);
     refresh_queue(e.target.id);
   }
 
   else if (e.target.closest('.delete')) {
     try {
-      let current = localStorage.getItem('current');
+      let current = localStorage.getItem('current-enroll');
 
       await post('DELETE', `/enroll/admin/${current}`, {
         phone: e.target.closest('.delete').dataset.target
@@ -94,7 +94,7 @@ document.addEventListener('change', async e => {
  ******************************************************************************/
 async function refresh() {
   try {
-    let current = localStorage.getItem('current');
+    let current = localStorage.getItem('current-enroll');
     let target = document.getElementById(current);
 
     if (current && target) {
