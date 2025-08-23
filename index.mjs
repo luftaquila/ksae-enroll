@@ -8,6 +8,7 @@ import Database from 'better-sqlite3';
 const queues = {
   formula: { name: 'Formula', short: 'FSK', length: 0 },
   baja: { name: 'Baja', short: 'BSK', length: 0 },
+  ev: { name: 'EV', short: 'EV', length: 0 },
 };
 
 // init db

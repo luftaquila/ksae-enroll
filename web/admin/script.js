@@ -59,6 +59,7 @@ document.addEventListener('click', async e => {
 
     e.target.classList.add('active');
     document.getElementById(`${e.target.id}-table`).classList.remove('hidden');
+    document.getElementById('enroll-container').classList.toggle('hidden', e.target.id !== 'formula');
 
     localStorage.setItem('current-enroll', e.target.id);
     refresh_queue(e.target.id);
