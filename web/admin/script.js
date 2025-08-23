@@ -12,11 +12,18 @@ let notyf = new Notyf({
   }]
 });
 
+let entries = undefined;
 let queues = undefined;
 let last = undefined;
 
 // init UI and event handlers
 window.addEventListener("DOMContentLoaded", async () => {
+  try {
+    entries = await get('/entry/all');
+  } catch (e) {
+    return notyf.error(`엔트리 정보를 가져올 수 없습니다.<br>${e.message}`);
+  }
+
   // draw tabs, contents and advanced menu
   await (async () => {
     try {
@@ -35,6 +42,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
       const sms = await get('/enroll/settings/sms');
       document.getElementById('sms').value = sms.value;
+      document.querySelector('.tab:first-child').click();
     } catch (e) {
       return notyf.error(`대기열 정보를 가져오지 못했습니다.<br>${e.message}`);
     }
@@ -88,6 +96,27 @@ document.addEventListener('change', async e => {
   }
 });
 
+document.getElementById('entry').addEventListener('input', e => {
+  const entry = entries[e.target.value];
+  document.getElementById('team').innerText = entry ? `${entry.univ} ${entry.team}` : '';
+});
+
+document.getElementById('confirm').addEventListener('click', async () => {
+  const num = document.getElementById('entry').value;
+
+  if (!num) {
+    return notyf.error('엔트리 번호를 입력하세요.');
+  }
+
+  try {
+    await post('POST', '/entry/enroll', { num: num });
+    document.getElementById('entry').value = '';
+    document.getElementById('team').innerText = '';
+    notyf.success('엔트리 등록을 완료했습니다.');
+  } catch (e) {
+    return notyf.error(e.message);
+  }
+});
 
 /*******************************************************************************
  * functions                                                                   *
