@@ -131,3 +131,13 @@ input::-webkit-inner-spin-button {
     zoom: 0.5;
   }
 }
+
+#qr {
+  flex-direction: column;
+  gap: 0rem!important;
+  font-weight: bold;
+}
+
+#qr img {
+  width: 120px;
+}
