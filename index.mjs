@@ -49,7 +49,10 @@ app.use((req, res, next) => {
   req.headers.authuser = req.headers.authorization ? Buffer.from(req.headers.authorization.split(' ')[1], 'base64').toString('utf-8').split(':')[0] : undefined;
   next();
 });
-app.use(pinoHttp({ stream: fs.createWriteStream('./data/enroll.log', { flags: 'a' }) }));
+app.use(pinoHttp({
+  stream: fs.createWriteStream('./data/enroll.log', { flags: 'a' }),
+  customProps: (req, res) => ({ reqBody: req.body }),
+}));
 
 app.listen(8000);
 
