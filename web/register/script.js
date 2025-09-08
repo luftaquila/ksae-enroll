@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const sms = await get('/enroll/settings/sms');
 
     if (sms) {
-      document.getElementById('sms').innerHTML = `<br>대기 ${sms.value}번일 때 문자로 알림이 전송됩니다.`;
+      document.getElementById('sms').innerHTML = `<br><b>대기 순번이 ${sms.value}번일 때</b> 문자로 알림이 전송됩니다.`;
     }
   } catch (e) {
     return notyf.error(`설정 정보를 가져올 수 없습니다.<br>${e.message}`);
